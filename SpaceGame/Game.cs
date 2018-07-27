@@ -63,13 +63,22 @@ namespace SpaceGame
             foreach (BaseObject obj in _objs)
                 obj.Update();
         }
+        static Random r = new Random();
 
         public static BaseObject[] _objs;
         public static void Load()
         {
             _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length; i++)
-                _objs[i] = new BaseObject(new Point(200, i * 20), new Point(10 - i, 15 -i), new Size(20, 20));
-        }
+            for (int i = 0; i < _objs.Length/2; i++)
+            {
+                int rnd = r.Next(10, 20);
+                _objs[i] = new BaseObject(new Point(200, i * 20), new Point(10 - i, 15 - i), new Size(rnd, rnd));
+            }
+            for (int i = _objs.Length / 2; i < _objs.Length; i++)
+            {
+                int rnd = r.Next(10, 20);
+                _objs[i] = new BaseObject(new Point(200, i * 20), new Point(10 - i, 15 - i), new Size(rnd, rnd));
+            }
+        }
     }
 }

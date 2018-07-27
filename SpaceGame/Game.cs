@@ -36,14 +36,16 @@ namespace SpaceGame
 
             Timer timer = new Timer { Interval = 100 };
             timer.Start();
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick;
+
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
             Draw();
             Update();
-        }
+        }
+
         public static void Draw()
         {
             // Проверяем вывод графики
@@ -81,7 +83,8 @@ namespace SpaceGame
             }
 
             for (int i = _objs.Length/2; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(200, i * 10), new Point(-i, 0), new Size(5,5));
+                _objs[i] = new Star(new Point(200, i * 10), new Point(-i, 0), new Size(5,5));
+
         }
     }
 }

@@ -79,6 +79,9 @@ namespace SpaceGame
                 int rnd = r.Next(10, 20);
                 _objs[i] = new BaseObject(new Point(200, i * 20), new Point(10 - i, 15 - i), new Size(rnd, rnd));
             }
+
+            for (int i = _objs.Length/2; i < _objs.Length; i++)
+                _objs[i] = new Star(new Point(200, i * 10), new Point(-i, 0), new Size(5,5));
         }
     }
 }

@@ -18,11 +18,11 @@ namespace SpaceGame
             Dir = dir;
             Size = size;
         }
-        public void Draw()
+        public virtual void Draw()
         {
             Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
-        public void Update()
+        public virtual void Update()
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y + Dir.Y;

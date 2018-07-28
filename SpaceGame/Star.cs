@@ -15,7 +15,9 @@ namespace SpaceGame
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
 
-        }        public override void Draw()
+        }
+
+        public override void Draw()
         {
             getStar(getColor(), 5);
             getStar(getColor(), 50);
@@ -40,6 +42,7 @@ namespace SpaceGame
             Pos.Y = Pos.Y - Dir.Y +2;
             if (Pos.Y < 0) Pos.Y = Game.Height - Size.Height;
             if (Pos.X < 0) Pos.X = Game.Width - Size.Width;
-        }
+        }
+
     }
 }

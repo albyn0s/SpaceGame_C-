@@ -107,7 +107,7 @@ namespace SpaceGame
                 else if (i == _objs.Length - 1)
                 {
                     p = 5;
-                    _objs[i] = getObj<blackHole>(50, i, p * 50, -p, 2);
+                    _objs[i] = getObj<blackHole>(70, i, p * 50, -p, 2);
                 }
             }
 

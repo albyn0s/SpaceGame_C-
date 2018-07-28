@@ -15,6 +15,10 @@ namespace SpaceGame
             form.Width = 800;
             form.Height = 600;
 
+            SplashScreen.Init(form);
+            form.Show();
+            SplashScreen.Draw();
+
             Game.Init(form);
             form.Show();
             Game.Draw();

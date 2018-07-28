@@ -41,6 +41,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="newObj.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SplashScreen.cs" />
     <Compile Include="Star.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -80,11 +80,11 @@ namespace SpaceGame
             _objs = new BaseObject[70];
             for (int i = 0; i < _objs.Length; i++)
             {
-                if (i <= _objs.Length / 2)
+                if (i <= _objs.Length / 2 - 20)
                 {
                     if (r % 2 == 0)
                     {
-                        _objs[i] = getObj<BaseObject>(3, i, i * 20, 5 - i, 15 - i);
+                        _objs[i] = getObj<BaseObject>(10, i, i * 20, 5 - i, 15 - i);
                         r++;
                     }
                     else
@@ -93,15 +93,21 @@ namespace SpaceGame
                         r++;
                     }
                 }
-                else if (i >= _objs.Length / 2 && i < _objs.Length -10)
+                else if (i >= _objs.Length / 2 - 20 && i < _objs.Length -10)
                 {
                     _objs[i] = getObj<Star>(5, i, z * 20, -z, 2);
                     z++;
                 }
-                else if (i >= _objs.Length -10)
+                else if (i >= _objs.Length -10 && i < _objs.Length - 1)
                 {
                     _objs[i] = getObj<newObj>(5, i, p * 50, -p, 2);
                     p++;
+                }
+
+                else if (i == _objs.Length - 1)
+                {
+                    p = 5;
+                    _objs[i] = getObj<blackHole>(50, i, p * 50, -p, 2);
                 }
             }
 

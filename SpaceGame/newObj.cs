@@ -32,4 +32,27 @@ namespace SpaceGame
         }
 
     }
+
+    class blackHole : BaseObject
+    {
+        Image image = Image.FromFile("2.png");
+
+        public blackHole(Point pos, Point dir, Size size) : base(pos, dir, size)
+        {
+
+        }
+
+        public override void Draw()
+        {
+            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
+        }
+
+        public override void Update()
+        {
+            Pos.X = Pos.X + Dir.X;
+            Pos.Y = Pos.Y - Dir.Y;
+            if (Pos.Y < 0) Pos.Y = Game.Height - Size.Height;
+            if (Pos.X < 0) Pos.X = Game.Width - Size.Width;
+        }
+    }
 }

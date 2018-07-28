@@ -17,15 +17,22 @@ namespace SpaceGame
         {
 
         }
+        Image image = Image.FromFile("1.png");
+        
         public BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
         }
+        //public virtual void Draw()
+        //{
+        //    Game.Buffer.Graphics.DrawEllipse(Pens.Cyan, Pos.X, Pos.Y, Size.Width, Size.Height);
+        //}
+
         public virtual void Draw()
         {
-            Game.Buffer.Graphics.DrawEllipse(Pens.Cyan, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
         }
         public virtual void Update()
         {

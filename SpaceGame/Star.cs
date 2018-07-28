@@ -9,27 +9,36 @@ namespace SpaceGame
 {
     class Star : BaseObject
     {
-        static BaseObject[] _objs;
+        int i = 0;
+        Pen[] pen = { Pens.White, Pens.Red, Pens.Magenta };
+        Random r = new Random();
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
 
-        }        public static void Load()
+        }        public override void Draw()
         {
-            _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length; i++)
-                _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(20, 20));
-        }        public override void Draw()
+            getStar(getColor(), 5);
+            getStar(getColor(), 50);
+            i++;
+        }
+
+        public Pen getColor()
         {
-            Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X, Pos.Y, Pos.X + Size.Width,
-            Pos.Y + Size.Height);
-            Game.Buffer.Graphics.DrawLine(Pens.White, Pos.X + Size.Width, Pos.Y, Pos.X,
-            Pos.Y + Size.Height);
+            return pen[r.Next(0, pen.Length)];
+        }
+
+        public void getStar(Pen color, int otherPos)
+        {
+            Game.Buffer.Graphics.DrawLine(color, Pos.X+ otherPos, Pos.Y+ otherPos, Pos.X + Size.Width+ otherPos, Pos.Y + Size.Height+ otherPos);
+            Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width+ otherPos, Pos.Y+ otherPos, Pos.X+ otherPos, Pos.Y + Size.Height+ otherPos);
         }
 
         public override void Update()
         {
             Pos.X = Pos.X + Dir.X;
-            if (Pos.X < 0) Pos.X = Game.Width + Size.Width;
+            Pos.Y = Pos.Y - Dir.Y +2;
+            if (Pos.Y < 0) Pos.Y = Game.Height - Size.Height;
+            if (Pos.X < 0) Pos.X = Game.Width - Size.Width;
         }
     }
 }

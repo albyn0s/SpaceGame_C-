@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-    static class Game
+    class Game
     {
         static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -95,7 +95,7 @@ namespace SpaceGame
                 }
                 else if (i >= _objs.Length / 2 - 20 && i < _objs.Length -10)
                 {
-                    _objs[i] = getObj<Star>(5, i, z * 20, -z, 2);
+                    _objs[i] = getObj<Star<Game>>(5, i, z * 20, -z, 2);
                     z++;
                 }
                 else if (i >= _objs.Length -10 && i < _objs.Length - 1)

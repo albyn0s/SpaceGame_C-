@@ -50,7 +50,7 @@ namespace SpaceGame
         public static void Draw()
         {
             // Проверяем вывод графики
-            //Buffer.Graphics.Clear(Color.Red);
+            //Buffer.Graphics.Clear(Color.Blue);
             //Buffer.Graphics.DrawRectangle(Pens.Red, new Rectangle(100, 100, 200, 200));
             //Buffer.Graphics.FillEllipse(Brushes.Red, new Rectangle(100, 100, 200, 200));
             //Buffer.Render();

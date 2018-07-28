@@ -45,6 +45,7 @@ namespace SpaceGame
             Draw();
             Update();
         }
+        static Random rnd = new Random();
 
         public static void Draw()
         {
@@ -64,28 +65,33 @@ namespace SpaceGame
 
         public static BaseObject[] _objs;
 
-        public static BaseObject getObj(int pos, int size, int i)
+        public static T getObj<T>(int size, int i, int pos1, int pos2, int pos3) where T : BaseObject
         {
-           return _objs[i] = new BaseObject(new Point(pos, i * 20), new Point(5 - i, 15 - i), new Size(size, size));
-        }
+            //Type type = typeof(T);
+            //if(type == typeof(BaseObject))
+            //return (T) new BaseObject(new Point(rnd.Next(0, 800), i * 20), new Point(5 - i, 15 - i), new Size(size, size));
+            //return default(T);
 
+            return (T)Activator.CreateInstance(typeof(T), new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
+        }
+        //new Point(rnd.Next(0, 800), i * 20), new Point(5 - i, 15 - i), new Size(size, size)
         public static void Load()
         {
             int z = 0, r = 0;
-            _objs = new BaseObject[100];
+            _objs = new BaseObject[70];
             for (int i = 0; i < _objs.Length / 2; i++)
             {
-                if (r % 2 == 0) getObj(600, 3, i);
-                else getObj(200, 6, i);
+                if (r % 2 == 0) _objs[i] = getObj<BaseObject>(3, i, i * 20, 5 - i, 15 - i);
+                else _objs[i] = getObj<BaseObject>(6, i, i * 20, 5 - i, 15 - i);
                 r++;
             }
 
             for (int i = _objs.Length/2; i < _objs.Length; i++)
             {
-                _objs[i] = new Star(new Point(-1, z * 10), new Point(-z, 2), new Size(5, 5));
+                _objs[i] = getObj<Star>(5,i,z*20,-z,2);
                 z++;
             }
-
+            //new Star(new Point(rnd.Next(0,800), z * 20), new Point(-z, 2), new Size(5, 5))
 
         }
     }

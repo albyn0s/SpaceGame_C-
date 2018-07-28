@@ -10,7 +10,7 @@ namespace SpaceGame
     class Star : BaseObject
     {
         int i = 0;
-        Pen[] pen = { Pens.White, Pens.Red, Pens.Magenta };
+        Pen[] pen = { Pens.White, Pens.Wheat, Pens.DarkKhaki };
         Random r = new Random();
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -32,6 +32,7 @@ namespace SpaceGame
             Game.Buffer.Graphics.DrawLine(color, Pos.X+ otherPos, Pos.Y+ otherPos, Pos.X + Size.Width+ otherPos, Pos.Y + Size.Height+ otherPos);
             Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width+ otherPos, Pos.Y+ otherPos, Pos.X+ otherPos, Pos.Y + Size.Height+ otherPos);
         }
+
 
         public override void Update()
         {

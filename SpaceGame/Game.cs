@@ -74,23 +74,45 @@ namespace SpaceGame
 
             return (T)Activator.CreateInstance(typeof(T), new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
         }
-        //new Point(rnd.Next(0, 800), i * 20), new Point(5 - i, 15 - i), new Size(size, size)
         public static void Load()
         {
-            int z = 0, r = 0;
+            int z = 0, r = 0, p = 0;
             _objs = new BaseObject[70];
-            for (int i = 0; i < _objs.Length / 2; i++)
+            for (int i = 0; i < _objs.Length; i++)
             {
-                if (r % 2 == 0) _objs[i] = getObj<BaseObject>(3, i, i * 20, 5 - i, 15 - i);
-                else _objs[i] = getObj<BaseObject>(6, i, i * 20, 5 - i, 15 - i);
-                r++;
+                if (i <= _objs.Length / 2)
+                {
+                    if (r % 2 == 0)
+                    {
+                        _objs[i] = getObj<BaseObject>(3, i, i * 20, 5 - i, 15 - i);
+                        r++;
+                    }
+                    else
+                    {
+                        _objs[i] = getObj<BaseObject>(6, i, i * 20, 5 - i, 15 - i);
+                        r++;
+                    }
+                }
+                else if (i >= _objs.Length / 2 && i < _objs.Length -10)
+                {
+                    _objs[i] = getObj<Star>(5, i, z * 20, -z, 2);
+                    z++;
+                }
+                else if (i >= _objs.Length -10)
+                {
+                    _objs[i] = getObj<newObj>(5, i, p * 100, -p, 2);
+                    p++;
+                }
             }
 
-            for (int i = _objs.Length/2; i < _objs.Length; i++)
-            {
-                _objs[i] = getObj<Star>(5,i,z*20,-z,2);
-                z++;
-            }
+
+
+
+            //for (int i = _objs.Length - 5; i < _objs.Length; i++)
+            //{
+            //    _objs[i] = getObj<newObj>(5, i, z * 20, -z, 2);
+            //    z++;
+            //}
             //new Star(new Point(rnd.Next(0,800), z * 20), new Point(-z, 2), new Size(5, 5))
 
         }

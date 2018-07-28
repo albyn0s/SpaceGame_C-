@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="BaseObject.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="newObj.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Star.cs" />
   </ItemGroup>

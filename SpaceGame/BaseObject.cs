@@ -12,6 +12,11 @@ namespace SpaceGame
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
+
+        public BaseObject()
+        {
+
+        }
         public BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
@@ -20,7 +25,7 @@ namespace SpaceGame
         }
         public virtual void Draw()
         {
-            Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawEllipse(Pens.Cyan, Pos.X, Pos.Y, Size.Width, Size.Height);
         }
         public virtual void Update()
         {

@@ -100,7 +100,7 @@ namespace SpaceGame
                 }
                 else if (i >= _objs.Length -10)
                 {
-                    _objs[i] = getObj<newObj>(5, i, p * 100, -p, 2);
+                    _objs[i] = getObj<newObj>(5, i, p * 50, -p, 2);
                     p++;
                 }
             }

@@ -36,24 +36,12 @@ namespace SpaceGame
             Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width + otherPos, Pos.Y + otherPos, Pos.X + otherPos, Pos.Y + Size.Height + otherPos);
         }
 
-        //public void getNewObj(Pen color, int otherPos)
-        //{
-        //    Game.Buffer.Graphics.DrawLine(color, Pos.X + otherPos, Pos.Y + otherPos, Pos.X + Size.Width + otherPos, Pos.Y + Size.Height + otherPos);
-        //    Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width + otherPos, Pos.Y + otherPos, Pos.X + otherPos, Pos.Y + Size.Height + otherPos);
-        //}
-
-
         public override void Update()
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y - Dir.Y +2;
             if (Pos.Y < 0) Pos.Y = Game.Height - Size.Height;
             if (Pos.X < 0) Pos.X = Game.Width - Size.Width;
-        }
-
-        public interface IVersionable
-        {
-
         }
     }
 }

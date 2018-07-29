@@ -80,7 +80,7 @@ namespace SpaceGame
                 }
                 else if (i >= _objs.Length -10 && i < _objs.Length - 1)
                 {
-                    _objs[i] = getObj<newObj>(1, i, p * 50, -p, 2);
+                    _objs[i] = getObj<newPictureObj>(1, i, p * 50, -p, 2);
                     p++;
                 }
 

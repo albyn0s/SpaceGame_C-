@@ -8,16 +8,17 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-    static class Game
+    partial class Game : Form
     {
-        static BufferedGraphicsContext _context;
+        protected static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
         // Свойства
         // Ширина и высота игрового поля
         public static int Width { get; set; }
         public static int Height { get; set; }
-        static Game()
+        public Game()
         {
+            InitializeComponent();
         }
         public static void Init(Form form)
         {
@@ -67,40 +68,24 @@ namespace SpaceGame
 
         public static T getObj<T>(int size, int i, int pos1, int pos2, int pos3) where T : BaseObject
         {
-            //Type type = typeof(T);
-            //if(type == typeof(BaseObject))
-            //return (T) new BaseObject(new Point(rnd.Next(0, 800), i * 20), new Point(5 - i, 15 - i), new Size(size, size));
-            //return default(T);
-
             return (T)Activator.CreateInstance(typeof(T), new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
         }
         public static void Load()
         {
-            int z = 0, r = 0, p = 0;
-            _objs = new BaseObject[70];
+            int z = 0, p = 0;
+            _objs = new BaseObject[80];
             for (int i = 0; i < _objs.Length; i++)
             {
-                if (i <= _objs.Length / 2 - 20)
-                {
-                    if (r % 2 == 0)
-                    {
-                        _objs[i] = getObj<BaseObject>(10, i, i * 20, 5 - i, 15 - i);
-                        r++;
-                    }
-                    else
-                    {
-                        _objs[i] = getObj<BaseObject>(6, i, i * 20, 5 - i, 15 - i);
-                        r++;
-                    }
-                }
+                if (i <= _objs.Length / 2 - 35) _objs[i] = getObj<BaseObject>(2, i, i * 20, 5 - i, 15 - i);
+                else if (i >= _objs.Length / 2 - 35 && i< _objs.Length / 2 - 20) _objs[i] = getObj<BaseObject>(3, i, i * 20, 5 - i, 15 - i);
                 else if (i >= _objs.Length / 2 - 20 && i < _objs.Length -10)
                 {
-                    _objs[i] = getObj<Star>(5, i, z * 20, -z, 2);
+                    _objs[i] = getObj<Star>(1, i, z * 20, -z, 2);
                     z++;
                 }
                 else if (i >= _objs.Length -10 && i < _objs.Length - 1)
                 {
-                    _objs[i] = getObj<newObj>(5, i, p * 50, -p, 2);
+                    _objs[i] = getObj<newObj>(1, i, p * 50, -p, 2);
                     p++;
                 }
 
@@ -110,16 +95,22 @@ namespace SpaceGame
                     _objs[i] = getObj<blackHole>(70, i, p * 50, -p, 2);
                 }
             }
+        }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Game
+            // 
+            this.ClientSize = new System.Drawing.Size(655, 381);
+            this.Name = "Game";
+            this.ResumeLayout(false);
 
+        }
 
-
-            //for (int i = _objs.Length - 5; i < _objs.Length; i++)
-            //{
-            //    _objs[i] = getObj<newObj>(5, i, z * 20, -z, 2);
-            //    z++;
-            //}
-            //new Star(new Point(rnd.Next(0,800), z * 20), new Point(-z, 2), new Size(5, 5))
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

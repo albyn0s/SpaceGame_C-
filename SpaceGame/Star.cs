@@ -11,6 +11,7 @@ namespace SpaceGame
     {
         int i = 0;
         Pen[] pen = { Pens.White, Pens.Wheat, Pens.DarkKhaki };
+        Pen[] pen1 = { Pens.White, Pens.Wheat, Pens.Cyan };
         Random r = new Random();
         public Star(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -19,21 +20,27 @@ namespace SpaceGame
 
         public override void Draw()
         {
-            getStar(getColor(), 5);
-            getStar(getColor(), 50);
+            getStar(getColor(true), 5);
+            getStar(getColor(false), 50);
             i++;
         }
 
-        public Pen getColor()
+        public Pen getColor(bool flag)
         {
-            return pen[r.Next(0, pen.Length)];
+            if (flag) return pen[r.Next(0, pen.Length)];
+            return pen1[r.Next(0, pen1.Length)];
         }
-
         public void getStar(Pen color, int otherPos)
         {
-            Game.Buffer.Graphics.DrawLine(color, Pos.X+ otherPos, Pos.Y+ otherPos, Pos.X + Size.Width+ otherPos, Pos.Y + Size.Height+ otherPos);
-            Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width+ otherPos, Pos.Y+ otherPos, Pos.X+ otherPos, Pos.Y + Size.Height+ otherPos);
+            Game.Buffer.Graphics.DrawLine(color, Pos.X + otherPos, Pos.Y + otherPos, Pos.X + Size.Width + otherPos, Pos.Y + Size.Height + otherPos);
+            Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width + otherPos, Pos.Y + otherPos, Pos.X + otherPos, Pos.Y + Size.Height + otherPos);
         }
+
+        //public void getNewObj(Pen color, int otherPos)
+        //{
+        //    Game.Buffer.Graphics.DrawLine(color, Pos.X + otherPos, Pos.Y + otherPos, Pos.X + Size.Width + otherPos, Pos.Y + Size.Height + otherPos);
+        //    Game.Buffer.Graphics.DrawLine(color, Pos.X + Size.Width + otherPos, Pos.Y + otherPos, Pos.X + otherPos, Pos.Y + Size.Height + otherPos);
+        //}
 
 
         public override void Update()
@@ -44,5 +51,9 @@ namespace SpaceGame
             if (Pos.X < 0) Pos.X = Game.Width - Size.Width;
         }
 
+        public interface IVersionable
+        {
+
+        }
     }
 }

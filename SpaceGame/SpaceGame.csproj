@@ -50,14 +50,11 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Game.cs" />
+    <Compile Include="newForm1Obj.cs" />
     <Compile Include="newObj.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SplashScreen.cs" />
     <Compile Include="Star.cs" />
   </ItemGroup>
   <ItemGroup>

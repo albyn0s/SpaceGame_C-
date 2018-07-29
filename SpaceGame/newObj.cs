@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class newObj : BaseObject
+    class newPictureObj : BaseObject
     {
-        public newObj(Point pos, Point dir, Size size) : base(pos, dir, size)
+        public newPictureObj(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
 
         }

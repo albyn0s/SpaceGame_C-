@@ -51,8 +51,8 @@ namespace SpaceGame
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y - Dir.Y;
-            if (Pos.Y < -500) Pos.Y = Game.Height - Size.Height;
-            if (Pos.X < -500) Pos.X = Game.Width - Size.Width;
+            if (Pos.Y < -200) Pos.Y = Game.Height - Size.Height;
+            if (Pos.X < -200) Pos.X = Game.Width - Size.Width;
         }
     }
 }

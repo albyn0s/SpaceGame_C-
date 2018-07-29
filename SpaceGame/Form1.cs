@@ -55,5 +55,19 @@ namespace SpaceGame
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form3 MyForm3 = new Form3();
+            MyForm3.Show();
+        }
+
+        private void рекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form3 MyForm3 = new Form3();
+            MyForm3.Show();
+        }
     }
 }

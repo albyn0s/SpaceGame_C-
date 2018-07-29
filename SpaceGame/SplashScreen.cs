@@ -11,7 +11,6 @@ namespace SpaceGame
 
     partial class SplashScreen : Game
     {
-        static public SplashScreen sc = new SplashScreen();
         static Random rnd = new Random();
         new static BufferedGraphicsContext _context;
         new public static BufferedGraphics Buffer;

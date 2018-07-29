@@ -9,7 +9,6 @@ namespace SpaceGame
 {
     class NewForm1Obj : BaseObject
     {
-        Random r = new Random();
         public NewForm1Obj(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
 

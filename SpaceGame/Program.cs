@@ -13,6 +13,8 @@ namespace SpaceGame
 
         static void Main()
         {
+            form1.Width = 800;
+            form1.Height = 600;
             SplashScreen.Init(form1);
             SplashScreen.Draw();
             Application.Run(form1);

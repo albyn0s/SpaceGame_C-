@@ -9,7 +9,6 @@ namespace SpaceGame
 {
     class Star : BaseObject
     {
-        int i = 0;
         Pen[] pen = { Pens.White, Pens.Wheat, Pens.DarkKhaki };
         Pen[] pen1 = { Pens.White, Pens.Wheat, Pens.Cyan };
         Random r = new Random();
@@ -22,7 +21,6 @@ namespace SpaceGame
         {
             getStar(getColor(true), 5);
             getStar(getColor(false), 50);
-            i++;
         }
 
         public Pen getColor(bool flag)

@@ -81,6 +81,7 @@
             this.рекордыToolStripMenuItem.Name = "рекордыToolStripMenuItem";
             this.рекордыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.рекордыToolStripMenuItem.Text = "Рекорды";
+            this.рекордыToolStripMenuItem.Click += new System.EventHandler(this.рекордыToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
@@ -109,6 +110,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Рекорды";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

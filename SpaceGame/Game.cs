@@ -37,11 +37,11 @@ namespace SpaceGame
 
             Timer timer = new Timer { Interval = 35 };
             timer.Start();
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick1;
 
         }
 
-        private static void Timer_Tick(object sender, EventArgs e)
+        private static void Timer_Tick1(object sender, EventArgs e)
         {
             Draw();
             Update();
@@ -67,8 +67,8 @@ namespace SpaceGame
         }
         public static void Load()
         {
-            int z = 0, p = 0;
             _objs = new BaseObject[80];
+            int z = 0, p = 0;
             for (int i = 0; i < _objs.Length; i++)
             {
                 if (i <= _objs.Length / 2 - 35) _objs[i] = getObj<BaseObject>(2, i, i * 20, 5 - i, 15 - i);

@@ -10,39 +10,26 @@ using System.Windows.Forms;
 
 namespace SpaceGame
 {
-    public partial class Form2 : Form
+    public partial class Form3 : Form
     {
-        public Form2()
+        public Form3()
         {
             InitializeComponent();
         }
 
-        private void новаяИграToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             Application.Restart();
-            Form2 MyForm2 = new Form2();
+            Form1 MyForm2 = new Form1();
             Game.Init(MyForm2);
             Game.Draw();
             MyForm2.Show();
-
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void рекордыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form3 MyForm3 = new Form3();
-            MyForm3.Show();
-        }
-
-        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
     }
 }

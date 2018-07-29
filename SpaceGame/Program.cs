@@ -7,23 +7,46 @@ using System.Windows.Forms;
 
 namespace SpaceGame
 {
-    class Program
+    class Program : Form
     {
-        static void Main(string[] args)
+        static Form form = new Form();
+        static Form1 form1 = new Form1();
+        static Form2 form2 = new Form2();
+        //static Form2 form1 = new Form2();
+
+        static void Main()
         {
-            Form form = new Form();
             form.Width = 800;
             form.Height = 600;
 
-            SplashScreen.Init(form);
-            form.Show();
+            SplashScreen.Init(form1);
             SplashScreen.Draw();
+            Application.Run(form1);
 
-            Game.Init(form);
-            form.Show();
-            Game.Draw();
-            Application.Run(form);
         }
-    }
 
+        static public void b1_click(object sender, EventArgs e)
+        {
+            Game.Init(form2);
+            form1.Show();
+            Game.Draw();
+        }
+        //static public void key_Down(object sender, KeyEventArgs e)
+        //{
+        //    int currentKey = e.KeyValue;
+        //    switch (currentKey)
+        //    {
+        //        case 113:
+        //            SpaceGame.SplashScreen.Init(form);
+        //            form.Show();
+        //            SpaceGame.SplashScreen.Draw();
+        //            break;
+        //        case 112:
+        //            Game.Init(form);
+        //            form.Show();
+        //            Game.Draw();
+        //            break;
+        //    }
+        //}
+    }
 }

@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-    partial class Game : Form
+    partial class Game
     {
         protected static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
@@ -18,7 +18,7 @@ namespace SpaceGame
         public static int Height { get; set; }
         public Game()
         {
-            InitializeComponent();
+
         }
         public static void Init(Form form)
         {
@@ -50,11 +50,6 @@ namespace SpaceGame
 
         public static void Draw()
         {
-            // Проверяем вывод графики
-            //Buffer.Graphics.Clear(Color.Blue);
-            //Buffer.Graphics.DrawRectangle(Pens.Red, new Rectangle(100, 100, 200, 200));
-            //Buffer.Graphics.FillEllipse(Brushes.Red, new Rectangle(100, 100, 200, 200));
-            //Buffer.Render();
             Buffer.Graphics.Clear(Color.Black);
             foreach (BaseObject obj in _objs) obj.Draw();
             Buffer.Render();
@@ -95,23 +90,6 @@ namespace SpaceGame
                     _objs[i] = getObj<blackHole>(70, i, p * 50, -p, 2);
                 }
             }
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // Game
-            // 
-            this.ClientSize = new System.Drawing.Size(655, 381);
-            this.Name = "Game";
-            this.ResumeLayout(false);
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

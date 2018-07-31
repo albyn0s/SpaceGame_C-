@@ -9,12 +9,14 @@ namespace SpaceGame
 {
     class Program
     {
-        static Form1 form1 = new Form1();
 
         static void Main()
         {
-            form1.Width = 800;
-            form1.Height = 600;
+            Form1 form1 = new Form1
+            {
+                //Width = Screen.PrimaryScreen.Bounds.Width,
+                //Height = Screen.PrimaryScreen.Bounds.Height
+            };
             SplashScreen.Init(form1);
             SplashScreen.Draw();
             Application.Run(form1);

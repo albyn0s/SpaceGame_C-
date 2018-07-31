@@ -72,21 +72,21 @@
             // стартToolStripMenuItem
             // 
             this.стартToolStripMenuItem.Name = "стартToolStripMenuItem";
-            this.стартToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.стартToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.стартToolStripMenuItem.Text = "Начать игру";
             this.стартToolStripMenuItem.Click += new System.EventHandler(this.стартToolStripMenuItem_Click_2);
             // 
             // рекордыToolStripMenuItem
             // 
             this.рекордыToolStripMenuItem.Name = "рекордыToolStripMenuItem";
-            this.рекордыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.рекордыToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.рекордыToolStripMenuItem.Text = "Рекорды";
             this.рекордыToolStripMenuItem.Click += new System.EventHandler(this.рекордыToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -121,6 +121,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Выход";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -152,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);

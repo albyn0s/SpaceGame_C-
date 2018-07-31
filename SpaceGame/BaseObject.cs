@@ -7,42 +7,34 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class BaseObject
+    interface ICollision
     {
+        bool Collision(ICollision obj);
+        Rectangle Rect { get; }
+    }
+
+    abstract class BaseObject : ICollision
+    {
+        protected static Random rnd = new Random();
+
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
 
-        public BaseObject()
-        {
-
-        }
-        Image image = Image.FromFile("1.png");
         
-        public BaseObject(Point pos, Point dir, Size size)
+        protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
         }
-        //public virtual void Draw()
-        //{
-        //    Game.Buffer.Graphics.DrawEllipse(Pens.Cyan, Pos.X, Pos.Y, Size.Width, Size.Height);
-        //}
 
-        public virtual void Draw()
-        {
-            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-        public virtual void Update()
-        {
-            Pos.X = Pos.X + Dir.X;
-            Pos.Y = Pos.Y + Dir.Y;
-            if (Pos.X < 0) Dir.X = -Dir.X;
-            if (Pos.X > Game.Width) Dir.X = -Dir.X;
-            if (Pos.Y < 0) Dir.Y = -Dir.Y;
-            if (Pos.Y > Game.Height) Dir.Y = -Dir.Y;
-        }
+        public Rectangle Rect => new Rectangle(Pos, Size);
+        public bool Collision(ICollision obj) => obj.Rect.IntersectsWith(this.Rect);
+
+        public abstract void Draw();
+
+        public abstract void Update();
     }
 
 }

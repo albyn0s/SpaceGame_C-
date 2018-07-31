@@ -47,10 +47,11 @@ namespace SpaceGame
         }
         new public static void Update()
         {
+            CheckScreen(Width, Height);
             foreach (BaseObject obj in _objs) obj.Update();
         }
 
-        new public static BaseObject[] _objs;
+        public static BaseObject[] _objs;
 
         new public static T getObj<T>(int size, int i, int pos1, int pos2, int pos3) where T : BaseObject
         {

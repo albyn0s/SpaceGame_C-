@@ -69,5 +69,10 @@ namespace SpaceGame
             Form3 MyForm3 = new Form3();
             MyForm3.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

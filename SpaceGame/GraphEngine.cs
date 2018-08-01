@@ -10,7 +10,7 @@ namespace SpaceGame
 {
     class GraphEngine
     {
-        static public int errorcode;
+        static int errorcode;
         static public Random rnd = new Random();
 
         public static int Width { get; set; }
@@ -40,9 +40,9 @@ namespace SpaceGame
                     else if (type == typeof(blackHole)) return (T)(BaseObject)new blackHole(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
                     else if (type == typeof(Star)) return (T)(BaseObject)new Star(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
                     else if (type == typeof(SpaceObj)) return (T)(BaseObject)new SpaceObj(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
-                    else if (type == typeof(Asteroid)) return (T)(BaseObject)new Asteroid(new Point(Game.Width, rnd.Next(0, 800)), new Point(pos2, pos3), new Size(size, size));
+                    else if (type == typeof(Asteroid)) return (T)(BaseObject)new Asteroid(new Point(rnd.Next(Game.Width, Game.Width + 70), rnd.Next(0, 800)), new Point(pos2, pos3), new Size(size, size));
                     else if (type == typeof(NewForm1Obj)) return (T)(BaseObject)new NewForm1Obj(new Point(Game.Width, rnd.Next(0, 800)), new Point(pos2, pos3), new Size(size, size));
-                    else if (type == typeof(Bullet)) return (T)(BaseObject)new Bullet(new Point(0, pos1), new Point(-pos2 / 5, pos3), new Size(size, 2));
+                    else if (type == typeof(Bullet)) return (T)(BaseObject)new Bullet(new Point(-10, pos1), new Point(-pos2 / 5, pos3), new Size(size, 4));
                 }
                     throw new NotSupportedException();
             }

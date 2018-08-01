@@ -11,7 +11,6 @@ namespace SpaceGame
     class Game : GraphEngine
     {
         public static BufferedGraphics Buffer;
-        static Form1 form = new Form1();
 
         static public void getGraph(Form form)
         {
@@ -77,7 +76,7 @@ namespace SpaceGame
 
             try
             {
-                _bullet = getObj<Bullet>(40, r, -r / 5, r);
+                _bullet = getObj<Bullet>(30, r, -r / 5, r);
 
                 for (int i = 0; i < _objs.Length; i += 4)
                     _objs[i] = getObj<SpaceObj>(2, i * 20, 5 - i, 15 - i);
@@ -104,17 +103,20 @@ namespace SpaceGame
                     _objs[i] = getObj<blackHole>(50, p * 50, -p, 2);
                 }
             }
-            catch(myException error) when (error.ErrorCode == 123456789)
+            catch(myException e) when (e.ErrorCode == 123456789)
             {
-                MessageBox.Show($"{error.Message}{error.ErrorCode}, Заданы некорректные размеры.");
+                MessageBox.Show($"{e.Message}{e.ErrorCode}, Заданы некорректные размеры.");
+                Application.Exit();
             }
-            catch (myException error) when (error.ErrorCode == 987654321)
+            catch (myException e) when (e.ErrorCode == 987654321)
             {
-                MessageBox.Show($"{error.Message} {error.ErrorCode}, Задана некорректная скорость.");
+                MessageBox.Show($"{e.Message}{e.ErrorCode}, Задана некорректная скорость.");
+                Application.Exit();
             }
-            catch (myException error) when (error.ErrorCode == 10101010)
+            catch (myException e) when (e.ErrorCode == 10101010)
             {
-                MessageBox.Show($"{error.Message} {error.ErrorCode}, Заданы некорректные координаты.");
+                MessageBox.Show($"{e.Message}{e.ErrorCode}, Заданы некорректные координаты.");
+                Application.Exit();
             }
             finally { }
         }

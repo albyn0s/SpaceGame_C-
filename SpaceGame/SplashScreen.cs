@@ -8,10 +8,8 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-
     class SplashScreen : GraphEngine 
     {
-        public static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
 
         static public void getGraph(Form form)
@@ -42,7 +40,7 @@ namespace SpaceGame
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
-            foreach (BaseObject obj in _objs) obj.Draw();
+            foreach (BaseObject obj in _objs) if (obj != null) obj.Draw();
             Buffer.Render();
         }
         public static void Update()

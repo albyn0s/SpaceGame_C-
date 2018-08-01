@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace SpaceGame
 {
 
-
     class Asteroid : BaseObject, ICloneable
     {
+        Image image = Image.FromFile("4.png");
 
         public object Clone()
         {
@@ -19,7 +19,8 @@ namespace SpaceGame
 
             asteroid.Power = Power;
             return asteroid;
-        }
+        }
+
         public int Power { get; set; }
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
         {
@@ -28,7 +29,7 @@ namespace SpaceGame
 
         public override void Draw()
         {
-            Game.Buffer.Graphics.FillEllipse(Brushes.White, Pos.X, Pos.Y, Size.Width, Size.Height);
+            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
         }
 
         public override void Update()
@@ -39,7 +40,7 @@ namespace SpaceGame
 
         public void getRndPos()
         {
-            Pos.X = Game.Width;
+            Pos.X = rnd.Next(Game.Width, Game.Width + 70);
             Pos.Y = rnd.Next(0, Game.Height);
             Size.Width = rnd.Next(10, 40);
             Size.Height = Size.Width;

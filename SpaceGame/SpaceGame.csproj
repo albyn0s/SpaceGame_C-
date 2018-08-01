@@ -59,8 +59,10 @@
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
+    <Compile Include="GraphEngine.cs" />
+    <Compile Include="myException.cs" />
     <Compile Include="newForm1Obj.cs" />
-    <Compile Include="newObj.cs" />
+    <Compile Include="newPictureObj.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

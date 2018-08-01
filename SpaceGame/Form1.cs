@@ -39,6 +39,7 @@ namespace SpaceGame
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form1 form = new Form1();
             this.Hide();
             Form2 MyForm2 = new Form2();
             Game.Init(MyForm2);
@@ -73,6 +74,11 @@ namespace SpaceGame
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+
         }
     }
 }

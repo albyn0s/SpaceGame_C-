@@ -8,28 +8,21 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-    partial class Game
+    class Game : GraphEngine
     {
-        protected static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
-        // Свойства
-        // Ширина и высота игрового поля
-        public static int Width { get; set; }
-        public static int Height { get; set; }
-        public Game()
+        static Form1 form = new Form1();
+
+        static public void getGraph(Form form)
         {
-
-        }
-        public static void Init(Form form)
-        {
-            Graphics g;
-
-            _context = BufferedGraphicsManager.Current;
-            g = form.CreateGraphics();
-
             Width = form.Width;
             Height = form.Height;
-            Buffer = _context.Allocate(g, new Rectangle(0, 0, Width, Height));
+            Buffer = BufferedGraphicsManager.Current.Allocate(form.CreateGraphics(), new Rectangle(0, 0, Width, Height));
+        }
+
+        public static void Init(Form form)
+        {
+            getGraph(form);
             Load();
 
             Timer timer = new Timer { Interval = 35 };
@@ -47,23 +40,16 @@ namespace SpaceGame
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black);
-            foreach (BaseObject obj in _objs) obj.Draw();
-            foreach (Asteroid obj in _asteroids) obj.Draw();
-            _bullet.Draw();
+            foreach (BaseObject obj in _objs) if(obj != null)obj.Draw();
+            foreach (Asteroid obj in _asteroids) if (obj != null) obj.Draw();
+            if(_bullet != null)_bullet.Draw();
             Buffer.Render();
         }
 
-        static public void CheckScreen(int Width, int Height)
-        {
-            if(Width > 1000 || Height > 1000 || Width < 0 || Height < 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
         public static void Update()
         {
             CheckScreen(Width, Height);
-            foreach (BaseObject obj in _objs) obj.Update();
+            foreach (BaseObject obj in _objs) if (obj != null) obj.Update();
             foreach (Asteroid ast in _asteroids)
             {
                 ast.Update();
@@ -81,52 +67,56 @@ namespace SpaceGame
         private static Bullet _bullet;
         private static Asteroid[] _asteroids;
 
-        static Random rnd = new Random();
+        static public int z = 0, p = 0;
 
-        public static T getObj<T>(int size, int i, int pos1, int pos2, int pos3) where T : BaseObject
-        {
-            Type type = typeof(T);
-
-            if (type == typeof(newPictureObj)) return (T)(BaseObject)new newPictureObj(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
-            else if (type == typeof(blackHole)) return (T)(BaseObject)new blackHole(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
-            else if (type == typeof(Star)) return (T)(BaseObject)new Star(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
-            else if (type == typeof(SpaceObj)) return (T)(BaseObject)new SpaceObj(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
-            else if (type == typeof(Asteroid)) return (T)(BaseObject)new Asteroid(new Point(Game.Width, rnd.Next(0,800)), new Point(pos2, pos3), new Size(size, size));
-
-            throw new NotSupportedException();
-        }
         public static void Load()
         {
             _objs = new BaseObject[80];
             _asteroids = new Asteroid[3];
             int r = rnd.Next(100, 400);
-            _bullet = new Bullet(new Point(0, r),new Point(-r / 5, r), new Size(40, 2));
-            int z = 0, p = 0;
 
-            for (int i = 0; i < _objs.Length; i += 4)
-                _objs[i] = getObj<SpaceObj>(2, i, i * 20, 5 - i, 15 - i);
-            for (int i = 1; i < _objs.Length; i += 4)
-                _objs[i] = getObj<SpaceObj>(3, i, i * 20, 5 - i, 15 - i);
-            for (int i = 2; i < _objs.Length; i += 4 )
+            try
             {
-                _objs[i] = getObj<Star>(1, i, z * 20, -z, 2);
-                z++;
+                _bullet = getObj<Bullet>(40, r, -r / 5, r);
+
+                for (int i = 0; i < _objs.Length; i += 4)
+                    _objs[i] = getObj<SpaceObj>(2, i * 20, 5 - i, 15 - i);
+                for (int i = 1; i < _objs.Length; i += 4)
+                    _objs[i] = getObj<SpaceObj>(3, i * 20, 5 - i, 15 - i);
+                for (int i = 2; i < _objs.Length; i += 4)
+                {
+                    _objs[i] = getObj<Star>(1, z * 20, -z, 2);
+                    z++;
+                }
+                for (int i = 3; i < _objs.Length; i += 4)
+                {
+                    _objs[i] = getObj<newPictureObj>(1, p * 50, -p, 2);
+                    p++;
+                }
+                for (var i = 0; i < _asteroids.Length; i++)
+                {
+                    r = rnd.Next(5, 50);
+                     _asteroids[i] = getObj<Asteroid>(r, 800, -r / 5, r);
+                }
+                for (int i = _objs.Length - 1; i < _objs.Length; i++)
+                {
+                    p = 5;
+                    _objs[i] = getObj<blackHole>(50, p * 50, -p, 2);
+                }
             }
-            for (int i = 3; i < _objs.Length; i += 4)
+            catch(myException error) when (error.ErrorCode == 123456789)
             {
-                _objs[i] = getObj<newPictureObj>(1, i, p * 50, -p, 2);
-                p++;
+                MessageBox.Show($"{error.Message}{error.ErrorCode}, Заданы некорректные размеры.");
             }
-            for (var i = 0; i < _asteroids.Length; i++)
+            catch (myException error) when (error.ErrorCode == 987654321)
             {
-                r = rnd.Next(5, 50);
-                _asteroids[i] = getObj<Asteroid>(r,i, 800,-r / 5, r);
+                MessageBox.Show($"{error.Message} {error.ErrorCode}, Задана некорректная скорость.");
             }
-            for (int i = _objs.Length-1; i < _objs.Length; i ++)
+            catch (myException error) when (error.ErrorCode == 10101010)
             {
-                p = 5;
-                _objs[i] = getObj<blackHole>(70, i, p * 50, -p, 2);
+                MessageBox.Show($"{error.Message} {error.ErrorCode}, Заданы некорректные координаты.");
             }
+            finally { }
         }
     }
 }

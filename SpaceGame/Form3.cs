@@ -17,7 +17,7 @@ namespace SpaceGame
             InitializeComponent();
         }
 
-        private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
+        private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e) // вернуться в меню
         {
             this.Hide();
             Application.Restart();
@@ -27,7 +27,7 @@ namespace SpaceGame
             MyForm2.Show();
         }
 
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e) //выход
         {
             Application.Exit();
         }

@@ -41,6 +41,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.consoleOFF = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,12 +151,36 @@
             this.label2.Text = "by Dmitry Muratov";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // consoleOFF
+            // 
+            this.consoleOFF.BackColor = System.Drawing.Color.White;
+            this.consoleOFF.Location = new System.Drawing.Point(304, 325);
+            this.consoleOFF.Name = "consoleOFF";
+            this.consoleOFF.Size = new System.Drawing.Size(162, 47);
+            this.consoleOFF.TabIndex = 6;
+            this.consoleOFF.Text = "Выключить консоль";
+            this.consoleOFF.UseVisualStyleBackColor = false;
+            this.consoleOFF.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(304, 325);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(162, 47);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "Включить консоль";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.consoleOFF);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -187,5 +213,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button consoleOFF;
+        private System.Windows.Forms.Button button5;
     }
 }

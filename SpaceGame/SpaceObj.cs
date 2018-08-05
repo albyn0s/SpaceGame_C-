@@ -7,20 +7,17 @@ using System.Drawing;
 
 namespace SpaceGame
 {
+    /// <summary>
+    /// Объект на сцене игры
+    /// </summary>
     class SpaceObj : BaseObject
     {
-        Image image = Image.FromFile("1.png");
-        public SpaceObj(Point pos, Point dir, Size size): base(pos,dir,size)
-        {
+        Image image = Image.FromFile("1.png"); //спрайт
+        public SpaceObj(Point pos, Point dir, Size size) : base(pos, dir, size) { } //конструтор
 
-        }
+        public override void Draw() => Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height)); //Отрисовка
 
-        public override void Draw()
-        {
-            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-
-        public override void Update()
+        public override void Update() //Поведение
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y + Dir.Y;

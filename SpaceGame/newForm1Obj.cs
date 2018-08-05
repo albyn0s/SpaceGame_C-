@@ -7,23 +7,18 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
+    /// <summary>
+    /// Объекты на загрузочном экране
+    /// </summary>
     class NewForm1Obj : BaseObject
     {
-        public NewForm1Obj(Point pos, Point dir, Size size) : base(pos, dir, size)
-        {
+        public NewForm1Obj(Point pos, Point dir, Size size) : base(pos, dir, size){ } //консруктор
 
-        }
+        Image image = Image.FromFile("3.png");//спрайт
 
-        Image image = Image.FromFile("3.png");
+        public override void Draw() => SplashScreen.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height)); //отрисовка
 
-        public override void Draw() => getStar();
-
-        public void getStar()
-        {
-            SplashScreen.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-
-        public override void Update()
+        public override void Update() //поведение
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y + Dir.Y;

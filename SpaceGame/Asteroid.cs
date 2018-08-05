@@ -8,40 +8,39 @@ using System.Threading.Tasks;
 namespace SpaceGame
 {
 
-    class Asteroid : BaseObject, ICloneable
+    class Asteroid : BaseObject
     {
-        Image image = Image.FromFile("4.png");
+        Image image = Image.FromFile("4.png"); //Спрайт
 
-        public object Clone()
+        public int Power { get; set; } //ХП
+
+        public bool lowPower(int damage) // Наносим урон астеройды с силой "damage".
         {
-            Asteroid asteroid = new Asteroid(new Point(Pos.X, Pos.Y), new 
-            Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height));
+            Power -= damage;
+            if(Power <= 0) //Если ХП астеройда меньше или равно 0, создаем новый астеройд.
+            {
+                
+                GetInfoLog.getLogFrom($"{Game.date} Астеройд уничтожен +10 очков"); // Логирование
+                getRndPos(); //Перенос по координатам и изменение размеров
+                return true;
+            }
+            
+            return false;
+        }
+        public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size) => Power = rnd.Next(4,9); //создаем астеройд со случайным кол-вом жизней.
 
-            asteroid.Power = Power;
-            return asteroid;
+        public override void Draw() => Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height)); //То как будет выглядеть астеройд.
+
+        public override void Update() // Поведение на сцене
+        {
+            Pos.X -= 10;// Скорость астеройда
+            if (Pos.X < -30) getRndPos();//Если улетел за экран, генерируем новый.
         }
 
-        public int Power { get; set; }
-        public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size)
+        public void getRndPos() //Получаем случайное значение X, Y и размеров астеройда.
         {
-            Power = 1;
-        }
-
-        public override void Draw()
-        {
-            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-
-        public override void Update()
-        {
-            Pos.X -= 10;
-            if (Pos.X < 0) getRndPos();
-        }
-
-        public void getRndPos()
-        {
-            Pos.X = rnd.Next(Game.Width, Game.Width + 70);
-            Pos.Y = rnd.Next(0, Game.Height);
+            Pos.X = rnd.Next(GraphEngine.Width, GraphEngine.Width + 70);
+            Pos.Y = rnd.Next(0, GraphEngine.Height);
             Size.Width = rnd.Next(10, 40);
             Size.Height = Size.Width;
         }

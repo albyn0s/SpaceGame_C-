@@ -7,22 +7,16 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
+    /// <summary>
+    /// Объекты на сцене игры
+    /// </summary>
     class newPictureObj : BaseObject
     {
-        public newPictureObj(Point pos, Point dir, Size size) : base(pos, dir, size)
-        {
+        public newPictureObj(Point pos, Point dir, Size size) : base(pos, dir, size){ } //конструтор
 
-        }
+        public override void Draw() => Game.Buffer.Graphics.DrawRectangle(Pens.Red, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));// Отрисовка
 
-        public override void Draw() => getRect(Pens.Red, 50);
-
-
-        public void getRect(Pen color, int otherPos)
-        {
-            Game.Buffer.Graphics.DrawRectangle(color, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-
-        public override void Update()
+        public override void Update() //Поведение
         {          
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y - Dir.Y + 2;
@@ -32,21 +26,18 @@ namespace SpaceGame
 
     }
 
+    /// <summary>
+    /// Черная дыра
+    /// </summary>
     class blackHole : BaseObject
     {
-        Image image = Image.FromFile("2.png");
+        Image image = Image.FromFile("2.png"); //спрайт
 
-        public blackHole(Point pos, Point dir, Size size) : base(pos, dir, size)
-        {
+        public blackHole(Point pos, Point dir, Size size) : base(pos, dir, size) { }//констурктор
 
-        }
+        public override void Draw() => Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height)); //отрисовка
 
-        public override void Draw()
-        {
-            Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));
-        }
-
-        public override void Update()
+        public override void Update() //поведение
         {
             Pos.X = Pos.X + Dir.X;
             Pos.Y = Pos.Y - Dir.Y;

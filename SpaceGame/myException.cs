@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
+    /// <summary>
+    /// проверка на исключительную ситуацию
+    /// </summary>
     [Serializable]
-
+    
     internal class myException : Exception
     {
         public int ErrorCode { get; set; }
@@ -22,7 +25,7 @@ namespace SpaceGame
 
         public override string Message => this.msg;
 
-        static public bool CheckException(int Size, int Speed,ref int code, int Pos1)
+        static public bool CheckException(int Size, int Speed,ref int code, int Pos1) //проверка и вывод кода ошибки
         {
             if (Size <= 0 || Size >= 100)
             {

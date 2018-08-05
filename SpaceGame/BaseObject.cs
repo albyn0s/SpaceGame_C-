@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SpaceGame
 {
-    interface ICollision
+    public delegate void Message();
+
+    interface ICollision // Переделанный интерфейс на столкновение объектов
     {
         bool Collision(ICollision obj);
         Rectangle Rect { get; }
@@ -21,7 +20,7 @@ namespace SpaceGame
         protected Point Dir;
         protected Size Size;
 
-        
+
         protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;

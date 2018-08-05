@@ -17,7 +17,7 @@ namespace SpaceGame
             InitializeComponent();
         }
 
-        private void новаяИграToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void новаяИграToolStripMenuItem_Click_1(object sender, EventArgs e) // верняться в меню
         {
             this.Hide();
             Application.Restart();
@@ -28,12 +28,12 @@ namespace SpaceGame
 
         }
 
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e) //выход
         {
             Application.Exit();
         }
 
-        private void рекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void рекордыToolStripMenuItem_Click(object sender, EventArgs e) //рекорды
         {
             this.Hide();
             Form3 MyForm3 = new Form3();

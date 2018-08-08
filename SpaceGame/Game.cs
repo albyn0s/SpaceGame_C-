@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace SpaceGame
 {
@@ -14,7 +15,11 @@ namespace SpaceGame
         public static Timer timer = new Timer { Interval = 35 }; //fps
         public static string date; // Фиксация времени для лога
 
-        static public void getGraph(Form form) //Буфер для графики
+        /// <summary>
+        /// буфер для графики
+        /// </summary>
+        /// <param name="form"></param>
+        static public void getGraph(Form form)
         {
             Width = form.Width;
             Height = form.Height;
@@ -27,11 +32,15 @@ namespace SpaceGame
         public static void Finish()
         {
             timer.Stop();
-            string text = "Игра окончена";
-            Buffer.Graphics.DrawString(text, new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.Yellow, Width / 2 - 150, Height / 2 - 80);
+            string text = $"    Игра окончена" + "\n" +  $"{Count} уровень "+ $"{_ship.Point} очков."; //сообщение в конце игры
+            Buffer.Graphics.DrawString(text, new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.Yellow, Width / 2 - 145, Height / 2 - 80); //вывод сообщения
             Buffer.Render();
         }
 
+        /// <summary>
+        /// инициализация формы
+        /// </summary>
+        /// <param name="form">передаваемая форма</param>
         public static void Init(Form form)
         {
             Ship.MessageDie += Finish; //Сообщение конца игры
@@ -50,7 +59,14 @@ namespace SpaceGame
             Draw(); // отрисовка объектов
             Update(); //  поведение объектов 
         }
+        /// <summary>
+        /// Номер уровня
+        /// </summary>
+        public static int Count = 1;
 
+        /// <summary>
+        /// отрисовка формы
+        /// </summary>
         public static void Draw()
         {
             Buffer.Graphics.Clear(Color.Black); // Задний фон
@@ -59,18 +75,29 @@ namespace SpaceGame
 
             Buffer?.Graphics.DrawString("Энергия:" + _ship.Energy, SystemFonts.DefaultFont, Brushes.White, 20, 40); // Интерфейс вывода энергии
             Buffer?.Graphics.DrawString("Очки:" + _ship.Point, SystemFonts.DefaultFont, Brushes.White, 100, 40); // Интерфейс вывода очков
+            Buffer?.Graphics.DrawString("Осталось астеройдов:" + _asteroids.Count, SystemFonts.DefaultFont, Brushes.White, 160, 40); // Интерфейс вывода очков
+            Buffer?.Graphics.DrawString("Уровень:" + Count, SystemFonts.DefaultFont, Brushes.White, 300, 40); //интерфейс текущего уровня
 
             Buffer.Render();
         }
         static public int i = 0;
+        public static int p = 1;
 
+        /// <summary>
+        /// обновление данных по объектам
+        /// </summary>
         public static void Update()
         {
             date = DateTime.Now.ToString("HH:mm:ss"); // Дата для логирования
             CheckScreen(Width, Height); // проверка на размеры экрана
 
             foreach (BaseObject obj in _objs) obj?.Update();
-            foreach (Bullet bul in _bullet) bul?.Update();
+            //foreach (Bullet bul in _bullet) bul?.Update();
+            for(int j = 0; j<_bullet.Count; j++)
+            {
+                _bullet[j]?.Update();
+                if (_bullet[j] != null && _bullet[j].getNull()) _bullet[j] = null;
+            }
             _heal?.Update();
 
 
@@ -83,10 +110,17 @@ namespace SpaceGame
                 getDamageFrom(ast); // Урон от астеройда
             }
             
-            
-            foreach (Bullet bul in _bullet) 
-                foreach (Asteroid ast in _asteroids)
-                    getDamageFromBul(ast, bul,damageValue(bul)); // проверка всех пуль и всех астеройдов на столкновение
+            getDamageFromBul(); // проверка всех пуль и всех астеройдов на столкновение
+        }
+
+        /// <summary>
+        /// создание астеройдов
+        /// </summary>
+        /// <param name="ast">счетчик</param>
+        public static void createAsteroids(ref int ast)
+        {
+            r = rnd.Next(5, 50);
+            _asteroids.Add(getObj<Asteroid>(r, 800, -r / 5, r));//создание объекта со случайными параметрами
         }
 
         #region Появление врагов(не реализовано)
@@ -110,20 +144,37 @@ namespace SpaceGame
         //public static enemyAlien _enemy = new enemyAlien(new Point(Game.Width, rnd.Next(100,300)), new Point(5, 5), new Size(50, 50));
         #endregion // не успел доделать
 
+        /// <summary>
+        /// объекты
+        /// </summary>
         public static BaseObject[] _objs;
-        public static Asteroid[] _asteroids;
-        public static Bullet[] _bullet;
+        /// <summary>
+        /// астеройды
+        /// </summary>
+        public static List<Asteroid> _asteroids;
+        /// <summary>
+        /// пули
+        /// </summary>
+        public static List<Bullet> _bullet = new List<Bullet>();
+        /// <summary>
+        /// аптечка
+        /// </summary>
         public static Heal _heal;
+        /// <summary>
+        /// корабль
+        /// </summary>
+        public static Ship _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(20, 20));
 
-        public static Ship _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(20, 20)); 
+        public static int Listpos = 10;
 
         #region Заполнение объектов
+        /// <summary>
+        /// загрузка/заполнение объектов
+        /// </summary>
         public static void Load()
         {
             _objs = new BaseObject[100];
-            _asteroids = new Asteroid[10];
-            _bullet = new Bullet[numOfbullet];
-
+            _asteroids = new List<Asteroid>(Listpos);
             _heal = getObj<Heal>(15, 800, -10, 2);
             try
             {
@@ -132,24 +183,22 @@ namespace SpaceGame
                     if (i <= _objs.Length / 2 / 2) _objs[i] = getObj<SpaceObj>(2, i * 20, 5 - i, 15 - i);
                     else if ((i > _objs.Length / 2 / 2) && (i <= _objs.Length / 2))
                     {
-                        _objs[i] = getObj<Star>(1, z * 20, -z, 2);
-                        z++;
+                        _objs[i] = getObj<Star>(1, z * 20, -z, 2); //создание объекта со случайными параметрами
+                        z++;//счетчик для star
                     }
                     else if ((i > _objs.Length / 2) && (i <= _objs.Length / 2 + 10))
                     {
-                        _objs[i] = getObj<newPictureObj>(1, p * 50, -p, 2);
-                        p++;
+                        _objs[i] = getObj<newPictureObj>(1, p * 50, -p, 2);//создание объекта со случайными параметрами
+                        p++;//счетчик для newPictureObj
                     }
                     else if ((i > _objs.Length / 2 + 10) && (i <= _objs.Length / 2 + 20))
                     {
-                        r = rnd.Next(5, 50);
-                        _asteroids[ast] = getObj<Asteroid>(r, 800, -r / 5, r);
-                        ast++;
+                        createAsteroids(ref ast);
                     }
                     else if ((i > _objs.Length / 2 + 20) && (i <= _objs.Length - 2))
                     {
-                        _objs[i] = getObj<Star>(1, z * 20, -z, 2);
-                        z++;
+                        _objs[i] = getObj<Star>(1, z * 20, -z, 2);//создание объекта со случайными параметрами
+                        z++;//счетчик для star
                     }
                     else if (i == _objs.Length - 1)
                     {

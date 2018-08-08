@@ -15,7 +15,9 @@ namespace SpaceGame
         public static int numOfbullet = 20; // кол-во пуль.
         private static Timer reload = new Timer(); // Таймер перезарядки
         private static bool flag = true; // Флаг для стрельбы
-        public static int r = rnd.Next(100, 400);
+        public static int r = rnd.Next(100, 400);//рандомное число
+        private static int count = 0; //счетчик
+
 
         #region Контроллер корабля
         public static void Form_KeyDown(object sender, KeyEventArgs e) //Управление корабля.
@@ -38,12 +40,12 @@ namespace SpaceGame
         {
             if (IcanFire(timeReload)) // проверка на возможность стрельбы.
             {
-                Game._bullet[numOfbullet - 1] = getObj<T>(20, Game._ship.getShipPos(), 10, 50); // создаем пулю.
-                numOfbullet--; //У счетчика массива вычитаем 1.
-                if (numOfbullet == 1) // Если счетчик равен 1, то вызываем очистку и задаем счетчик в начальное значение.
+                Game._bullet.Add(getObj<T>(20, Game._ship.getShipPos(), 10, 50)); // создаем пулю.
+                count++;
+                if(count == 10)
                 {
-                    numOfbullet = 20;
-                    GC.Collect();  // очистка
+                    GC.Collect();//очистка
+                    count = 0;//сброс счетчика
                 }
             }
         }
@@ -56,23 +58,44 @@ namespace SpaceGame
         /// <param name="ast">Астеройд</param>
         /// <param name="bul">Тип пули</param>
         /// <param name="damage">Урон от типа пули</param>
-        public static void getDamageFromBul(Asteroid ast, Bullet bul, int damage)
+        public static void getDamageFromBul()
         {
-            if (bul != null && bul.Collision(ast) && ast != null) // Проверка на столкновение пули и астеройда.
-            {
-                bul.getNull(); //при столкновении уничтоженаем пулю.
-                if (ast.lowPower(damage)) Game._ship.getPoint(); // Если вернулся "true", значит астеройд уничтожен и записываем очки для корабля.
-                GetInfoLog.getLogFrom($"{Game.date} объект {bul} нанес {damage} урона, {ast}"); //логирование.
-            }
+            for (int j = 0; j < Game._bullet.Count; j++)//проверка всех пуль и астеройдов
+                for (int i = 0; i < Game._asteroids.Count; i++)
+                    if (Game._bullet[j] != null && Game._bullet[j].Collision(Game._asteroids[i]) && Game._asteroids[i] != null) // Проверка на столкновение пули и астеройда.
+                    {
+                        int damage = damageValue(Game._bullet[j]);//узнаем урон по типу пули
+                        Game._bullet[j] = null; //при столкновении уничтоженаем пулю.
+                        GetInfoLog.getLogFrom($"{Game.date} объект {Game._bullet[j]} нанес {damage} урона, {Game._asteroids[i]}"); //логирование.
+                        if (Game._asteroids[i].lowPower(damage))
+                        {
+                            Game._ship.getPoint(); // Если вернулся "true", значит астеройд уничтожен и записываем очки для корабля.
+                            Game._asteroids.Remove(Game._asteroids[i]); //удаляем этот астеройд из списка
+                            
+                            GetInfoLog.getLogFrom($"{Game.date} Осталось {Game._asteroids.Count} астеройдов"); //логирование.
+                            if (Game._asteroids.Count == 0) //если астеройдов осталось 0
+                            {
+                                GetInfoLog.getLogFrom($"{Game.date} инициализация"); //логирование.
+                                Game.Listpos++;//увеличиваем коллекцию на 1
+                                Game._asteroids = new List<Asteroid>(Game.Listpos);//создаем новую коллекцию.
+                                Game.Count++;
+                                for (int e = 0; e < Game.Listpos; e++)
+                                {
+                                    GetInfoLog.getLogFrom($"{Game.date} создан объект {e}"); //логирование.
+                                    Game.createAsteroids(ref e);//создаем астеройды
+                                }
+                            }
+                        }
+                    }
         }
         /// <summary>
         /// определяем урон от типа пули
         /// </summary>
         /// <param name="bul">Тип передаваемой пули</param>
         /// <returns></returns>
-        public static int damageValue(object bul)
+        public static int damageValue(object bul)//вычисляем урон для типа пули
         {
-            if (bul?.GetType() == typeof(YellowBullet)) return YellowBullet.Damage;
+            if (bul?.GetType() == typeof(YellowBullet)) return YellowBullet.Damage; 
             else if (bul?.GetType() == typeof(BlueBullet)) return BlueBullet.Damage;
             else return Bullet.Damage;
         }
@@ -87,7 +110,7 @@ namespace SpaceGame
         /// <returns></returns>
         private static bool IcanFire(int timeReload)
         {
-            if (flag)
+            if (flag)//если флаг true можем стрелять иначе false
             {
                 flag = false;
                 reload = new Timer { Interval = timeReload }; //Таймер перезарядки (перезарядка общая)
@@ -130,7 +153,7 @@ namespace SpaceGame
             if (Game._ship.Energy <= 0) // если энергии нет, игра окончена.
             {
                 GetInfoLog.getLogFrom($"{Game.date} игра окончена"); // логирование
-                Game._ship?.Die();
+                Game._ship?.Die();//корабль взорван
             }
         }
         #endregion

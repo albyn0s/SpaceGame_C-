@@ -20,7 +20,9 @@ namespace SpaceGame
             Pos.X -= 5;
             if (Pos.X < -30) getRndPos();//Если улетел за экран, генерируем новый.
         }
-
+        /// <summary>
+        /// //Получаем случайное значение X, Y.
+        /// </summary>
         public void getRndPos() //Получаем случайное значение X, Y.
         {
             Pos.X = rnd.Next(GraphEngine.Width, GraphEngine.Width + 200);

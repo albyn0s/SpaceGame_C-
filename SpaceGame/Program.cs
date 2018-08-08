@@ -12,7 +12,6 @@ namespace SpaceGame
     {
         static void Main()
         {
-
             System.IO.File.Create("log.dat").Close(); //создаем файл для лога и закрываем его.
 
             Form1 form1 = new Form1(); // создаем форму.

@@ -8,8 +8,8 @@ namespace SpaceGame
         static int errorcode; // Код ошибки
         static public Random rnd = new Random(); 
 
-        public static int Width { get; set; }
-        public static int Height { get; set; }
+        public static int Width { get; set; }//ширина
+        public static int Height { get; set; }//высота
 
         static public void CheckScreen(int Width, int Height) // проверка размеров экрана.
         {
@@ -26,11 +26,12 @@ namespace SpaceGame
         /// <returns></returns>
         public static T getObj<T>(int size, int pos1, int pos2, int pos3)where T : BaseObject
         {
-            Type type = typeof(T);
+            Type type = typeof(T);//приведение Т типа к определенному
             {
                 if (myException.CheckException(size, pos3, ref errorcode, pos1)) throw new myException("Ошибка создания объекта", ref errorcode); // проверка на исключительную ситуацию
                 else
                 {
+                    //поиск подходящего типа
                     if (type == typeof(newPictureObj)) return (T)(BaseObject)new newPictureObj(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
                     else if (type == typeof(blackHole)) return (T)(BaseObject)new blackHole(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));
                     else if (type == typeof(Star)) return (T)(BaseObject)new Star(new Point(rnd.Next(0, 800), pos1), new Point(pos2, pos3), new Size(size, size));

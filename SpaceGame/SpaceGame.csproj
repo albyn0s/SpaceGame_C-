@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Asteroid.cs" />
     <Compile Include="BaseObject.cs" />
+    <Compile Include="blackHole.cs" />
     <Compile Include="BlueBullet.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="enemyAlien.cs" />

@@ -15,13 +15,18 @@ namespace SpaceGame
     {
         public int ErrorCode { get; set; }
 
+        /// <summary>
+        /// Констурктор
+        /// </summary>
+        /// <param name="Msg">Сообщение</param>
+        /// <param name="code">код ошибки</param>
         public myException(string Msg, ref int code)
         {
             ErrorCode = code;
             msg = Msg;
         }
 
-        string msg;
+        string msg;//сообщение
 
         public override string Message => this.msg;
 

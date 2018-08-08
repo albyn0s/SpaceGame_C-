@@ -17,13 +17,25 @@ namespace SpaceGame
 
         Image image = Image.FromFile("5.png");//спрайт
 
-        public Bullet(Point pos, Point dir, Size size):base(pos,dir,size){ Damage = 1; }//Урон
+        public Bullet(Point pos, Point dir, Size size):base(pos,dir,size){ Damage = 3; }//Урон
 
         public override void Draw() => Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height));//Отрисовка
 
         public override void Update() => Pos.X += bulSpeed;//Полет пули
 
-        public void getNull() => Pos.Y = 1000; // через foreach не удалось уничтожить объект, поэтому отправляю его далеко и надолго по Y
-
+        /// <summary>
+        /// уничтожаем картинку и возвращаем true
+        /// </summary>
+        /// <returns></returns>
+        public bool getNull()
+        {
+            if (Pos.X > Game.Width)
+            {
+                image.Dispose();
+                return true;
+            }
+            else return false;
+        }
+            // через foreach не удалось уничтожить объект, поэтому отправляю его далеко и надолго по Y
     }
 }

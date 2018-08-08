@@ -19,12 +19,12 @@ namespace SpaceGame
 
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e) // вернуться в меню
         {
-            this.Hide();
-            Application.Restart();
-            Form1 MyForm2 = new Form1();
+            this.Hide();//скрываем форму
+            Application.Restart();// перезапускаем приложение
+            Form1 MyForm2 = new Form1();//создаем новую форму.
             Game.Init(MyForm2);
             Game.Draw();
-            MyForm2.Show();
+            MyForm2.Show();//показываем форму.
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e) //выход

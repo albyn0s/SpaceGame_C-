@@ -12,8 +12,16 @@ namespace SpaceGame
     {
         Image image = Image.FromFile("4.png"); //Спрайт
 
+        /// <summary>
+        /// прочность астеройда
+        /// </summary>
         public int Power { get; set; } //ХП
 
+        /// <summary>
+        /// Наносим урон астеройду с силой "damage".
+        /// </summary>
+        /// <param name="damage">сила урона</param>
+        /// <returns></returns>
         public bool lowPower(int damage) // Наносим урон астеройды с силой "damage".
         {
             Power -= damage;
@@ -27,16 +35,31 @@ namespace SpaceGame
             
             return false;
         }
+        /// <summary>
+        /// //создаем астеройд со случайным кол-вом жизней.
+        /// </summary>
+        /// <param name="pos">позиция</param>
+        /// <param name="dir">направление</param>
+        /// <param name="size">размеры</param>
         public Asteroid(Point pos, Point dir, Size size) : base(pos, dir, size) => Power = rnd.Next(4,9); //создаем астеройд со случайным кол-вом жизней.
 
+        /// <summary>
+        /// //То как будет выглядеть астеройд.
+        /// </summary>
         public override void Draw() => Game.Buffer.Graphics.DrawImage(image, new Rectangle(Pos.X, Pos.Y, Size.Width, Size.Height)); //То как будет выглядеть астеройд.
 
+        /// <summary>
+        ///  Поведение на сцене 
+        /// </summary>
         public override void Update() // Поведение на сцене
         {
             Pos.X -= 10;// Скорость астеройда
             if (Pos.X < -30) getRndPos();//Если улетел за экран, генерируем новый.
         }
 
+        /// <summary>
+        /// //Получаем случайное значение X, Y и размеров астеройда.
+        /// </summary>
         public void getRndPos() //Получаем случайное значение X, Y и размеров астеройда.
         {
             Pos.X = rnd.Next(GraphEngine.Width, GraphEngine.Width + 70);

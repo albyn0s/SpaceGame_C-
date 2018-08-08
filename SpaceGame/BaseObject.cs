@@ -5,7 +5,9 @@ using System.Drawing;
 namespace SpaceGame
 {
     public delegate void Message();
-
+    /// <summary>
+    /// Переделанный интерфейс на столкновение объектов
+    /// </summary>
     interface ICollision // Переделанный интерфейс на столкновение объектов
     {
         bool Collision(ICollision obj);
@@ -20,7 +22,12 @@ namespace SpaceGame
         protected Point Dir;
         protected Size Size;
 
-
+        /// <summary>
+        /// Конструктор объекта
+        /// </summary>
+        /// <param name="pos">Позиция</param>
+        /// <param name="dir">Направление</param>
+        /// <param name="size">Размеры</param>
         protected BaseObject(Point pos, Point dir, Size size)
         {
             Pos = pos;
@@ -29,6 +36,11 @@ namespace SpaceGame
         }
 
         public Rectangle Rect => new Rectangle(Pos, Size);
+        /// <summary>
+        /// столкновение объектов
+        /// </summary>
+        /// <param name="obj">объект</param>
+        /// <returns></returns>
         public bool Collision(ICollision obj) => obj.Rect.IntersectsWith(this.Rect);
 
         public abstract void Draw();

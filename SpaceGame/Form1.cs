@@ -34,11 +34,11 @@ namespace SpaceGame
 
         private void стартToolStripMenuItem_Click_2(object sender, EventArgs e) //Старт игры
         {
-            this.Hide();
-            Form2 MyForm2 = new Form2();
+            this.Hide();//cкрываем форму
+            Form2 MyForm2 = new Form2();//создаем новую форму
             Game.Init(MyForm2);
             Game.Draw();
-            MyForm2.Show();
+            MyForm2.Show(); //показываем форму
 
         }
 
@@ -49,11 +49,11 @@ namespace SpaceGame
 
         private void button1_Click(object sender, EventArgs e) //Старт игры
         {
-            this.Hide();
-            Form2 MyForm2 = new Form2();
+            this.Hide();//cкрываем форму
+            Form2 MyForm2 = new Form2();//создаем новую форму
             Game.Init(MyForm2);
             Game.Draw();
-            MyForm2.Show();
+            MyForm2.Show();//показываем форму
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -68,16 +68,16 @@ namespace SpaceGame
 
         private void button2_Click(object sender, EventArgs e) // Таблица рекордов
         {
-            this.Hide();
-            Form3 MyForm3 = new Form3();
-            MyForm3.Show();
+            this.Hide();//cкрываем форму
+            Form3 MyForm3 = new Form3();//создаем новую форму
+            MyForm3.Show();//показываем форму
         }
 
         private void рекордыToolStripMenuItem_Click(object sender, EventArgs e) // Таблица рекордов
         {
-            this.Hide();
-            Form3 MyForm3 = new Form3();
-            MyForm3.Show();
+            this.Hide();//cкрываем форму
+            Form3 MyForm3 = new Form3();//создаем новую форму
+            MyForm3.Show();//показываем форму
         }
 
         private void button3_Click(object sender, EventArgs e) //Выход
@@ -92,16 +92,16 @@ namespace SpaceGame
 
         private void button4_Click(object sender, EventArgs e) //Скрытие консоли
         {
-            this.consoleOFF.Hide();
-            ShowWindow(GetConsoleWindow(), 0);
-            this.button5.Show();
+            this.consoleOFF.Hide();//скрываем кнопку
+            ShowWindow(GetConsoleWindow(), 0);//скрываем консоль
+            this.button5.Show();//показываем button5 кнопку.
         }
 
         private void button5_Click(object sender, EventArgs e) //Появление консоли
         {
-            this.button5.Hide();
-            ShowWindow(GetConsoleWindow(), 5);
-            this.consoleOFF.Show();
+            this.button5.Hide();//скрываем кнопку
+            ShowWindow(GetConsoleWindow(), 5);//показываем консоль
+            this.consoleOFF.Show();//показываем consoleOFF кнопку 
         }
     }
 }

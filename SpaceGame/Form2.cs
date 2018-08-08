@@ -19,12 +19,12 @@ namespace SpaceGame
 
         private void новаяИграToolStripMenuItem_Click_1(object sender, EventArgs e) // верняться в меню
         {
-            this.Hide();
-            Application.Restart();
-            Form2 MyForm2 = new Form2();
+            this.Hide();//скрываем форму
+            Application.Restart();//перезапускаем приложение
+            Form2 MyForm2 = new Form2();//создаем новую форму
             Game.Init(MyForm2);
             Game.Draw();
-            MyForm2.Show();
+            MyForm2.Show();//показываем форму.
 
         }
 
@@ -35,9 +35,9 @@ namespace SpaceGame
 
         private void рекордыToolStripMenuItem_Click(object sender, EventArgs e) //рекорды
         {
-            this.Hide();
-            Form3 MyForm3 = new Form3();
-            MyForm3.Show();
+            this.Hide();//скрываем форму
+            Form3 MyForm3 = new Form3(); //создаем новую форму.
+            MyForm3.Show();//показываем форму.
         }
 
         private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
